@@ -27,15 +27,11 @@ class PreviewProvider: QLPreviewProvider, QLPreviewingController {
         }
         
         let previewSize = CGSize(width: 800, height: 600)
-        return QLPreviewReply(contextSize: previewSize, isBitmap: false) { (reply: QLPreviewReply) in
-            reply.contextSize = previewSize
+        return QLPreviewReply(contextSize: previewSize, isBitmap: false) { (context: CGContext, reply: QLPreviewReply) in
             let view = MarkdownPreviewView(content: content, isTruncated: isTruncated)
             let hostingView = NSHostingView(rootView: view)
             hostingView.frame = CGRect(origin: .zero, size: previewSize)
-            
-            let ctx = NSGraphicsContext.current!.cgContext
-            hostingView.layer?.render(in: ctx)
-            return true
+            hostingView.layer?.render(in: context)
         }
     }
 }
