@@ -7,16 +7,14 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-
-
 jobs:
   build:
     name: Build and Test
-    runs-on: macos-15 # Use macOS 15 which comes with Xcode 16 as default
+    runs-on: macos-15
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
 
     - name: Install XcodeGen
       run: brew install xcodegen
@@ -28,10 +26,6 @@ jobs:
     - name: Resolve Package Dependencies
       run: |
         xcodebuild -resolvePackageDependencies -project MDPreviewer.xcodeproj -scheme MDPreviewer
-
-    - name: List Targets and Schemes
-      run: |
-        xcodebuild -list -project MDPreviewer.xcodeproj
 
     - name: Build MDPreviewer
       run: |

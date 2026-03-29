@@ -26,8 +26,16 @@ class PreviewProvider: QLPreviewProvider, QLPreviewingController {
             content = try String(contentsOf: fileURL, encoding: .utf8)
         }
         
-        return QLPreviewReply(contextSize: .zero) { () -> MarkdownPreviewView in
-            MarkdownPreviewView(content: content, isTruncated: isTruncated)
+        let previewSize = CGSize(width: 800, height: 600)
+        return QLPreviewReply(contextSize: previewSize, isBitmap: false) { (reply: QLPreviewReply) in
+            reply.contextSize = previewSize
+            let view = MarkdownPreviewView(content: content, isTruncated: isTruncated)
+            let hostingView = NSHostingView(rootView: view)
+            hostingView.frame = CGRect(origin: .zero, size: previewSize)
+            
+            let ctx = NSGraphicsContext.current!.cgContext
+            hostingView.layer?.render(in: ctx)
+            return true
         }
     }
 }
