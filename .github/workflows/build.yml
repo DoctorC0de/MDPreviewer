@@ -24,15 +24,12 @@ jobs:
 
     - name: Generate Xcode Project
       run: |
-        cd Development/MDPreviewer
         xcodegen generate
 
     - name: List Targets and Schemes
       run: |
-        cd Development/MDPreviewer
         xcodebuild -list -project MDPreviewer.xcodeproj
 
     - name: Build MDPreviewer
       run: |
-        cd Development/MDPreviewer
         xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer -destination 'platform=macOS'
