@@ -30,16 +30,10 @@ private struct AttributedStringBuilder: OutputBuilder {
     
     mutating func addToken(_ token: String, ofType type: TokenType) {
         let color = theme.tokenColors[type] ?? .white
-        text = text + Text(token).foregroundColor(Color(nsColor: color))
+        text = text + Text(token).foregroundColor(SwiftUI.Color(nsColor: color))
     }
     
     mutating func addPlainText(_ text: String) { self.text = self.text + Text(text) }
     mutating func addWhitespace(_ whitespace: String) { self.text = self.text + Text(whitespace) }
     func build() -> Text { text }
-}
-
-extension Color {
-    init(nsColor: Splash.Color) {
-        self.init(nsColor)
-    }
 }
