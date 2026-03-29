@@ -20,13 +20,21 @@ jobs:
       run: brew install xcodegen
 
     - name: Generate Xcode Project
-      run: |
-        xcodegen generate
+      run: xcodegen generate
 
     - name: Resolve Package Dependencies
-      run: |
-        xcodebuild -resolvePackageDependencies -project MDPreviewer.xcodeproj -scheme MDPreviewer
+      run: xcodebuild -resolvePackageDependencies -project MDPreviewer.xcodeproj -scheme MDPreviewer
 
     - name: Build MDPreviewer
       run: |
-        xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer -destination 'platform=macOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS=""
+        xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer \
+          -configuration Release \
+          -destination 'platform=macOS' \
+          -derivedDataPath ./build \
+          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS=""
+
+    - name: Upload MDPreviewer.app
+      uses: actions/upload-artifact@v4
+      with:
+        name: MDPreviewer
+        path: ./build/Build/Products/Release/MDPreviewer.app
