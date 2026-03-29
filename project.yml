@@ -1,0 +1,58 @@
+name: MDPreviewer
+options:
+  bundleIdPrefix: com.mdpreviewer
+packages:
+  MarkdownUI:
+    url: https://github.com/gonzalezreal/swift-ui-markdown
+    from: 2.1.0
+  Splash:
+    url: https://github.com/JohnSundell/Splash
+    from: 0.16.0
+  SnapshotTesting:
+    url: https://github.com/pointfreeco/swift-snapshot-testing
+    from: 1.13.0
+targets:
+  MDPreviewerCore:
+    type: framework
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources: [MDPreviewerCore]
+    dependencies:
+      - package: MarkdownUI
+      - package: Splash
+  MDPreviewer:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources: [MDPreviewer]
+    entitlements:
+      path: MDPreviewer/MDPreviewer.entitlements
+    dependencies:
+      - target: MDPreviewerCore
+      - target: MDPreviewerExtension
+  MDPreviewerExtension:
+    type: app-extension
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources: [MDPreviewerExtension]
+    entitlements:
+      path: MDPreviewerExtension/MDPreviewerExtension.entitlements
+    dependencies:
+      - target: MDPreviewerCore
+    info:
+      path: MDPreviewerExtension/MDPreviewerExtension-Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.quicklook.preview
+          NSExtensionPrincipalClass: "$(PRODUCT_MODULE_NAME).PreviewProvider"
+          NSExtensionAttributes:
+            QLSupportedContentTypes:
+              - public.markdown
+              - net.daringfireball.markdown
+  MDPreviewerTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources: [MDPreviewerTests]
+    dependencies:
+      - target: MDPreviewerCore
+      - package: SnapshotTesting
