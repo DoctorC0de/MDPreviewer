@@ -7,13 +7,12 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 
 jobs:
   build:
     name: Build and Test
-    runs-on: macos-14
+    runs-on: macos-15 # Use macOS 15 which comes with Xcode 16 as default
 
     steps:
     - name: Checkout repository
@@ -26,10 +25,14 @@ jobs:
       run: |
         xcodegen generate
 
+    - name: Resolve Package Dependencies
+      run: |
+        xcodebuild -resolvePackageDependencies -project MDPreviewer.xcodeproj -scheme MDPreviewer
+
     - name: List Targets and Schemes
       run: |
         xcodebuild -list -project MDPreviewer.xcodeproj
 
     - name: Build MDPreviewer
       run: |
-        xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer -destination 'platform=macOS'
+        xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer -destination 'platform=macOS' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS=""
