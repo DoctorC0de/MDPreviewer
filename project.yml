@@ -17,6 +17,8 @@ targets:
     platform: macOS
     deploymentTarget: "14.0"
     sources: [MDPreviewerCore]
+    entitlements:
+      path: MDPreviewerCore/MDPreviewerCore.entitlements
     dependencies:
       - package: MarkdownUI
       - package: Splash
@@ -27,6 +29,8 @@ targets:
     sources: [MDPreviewer]
     entitlements:
       path: MDPreviewer/MDPreviewer.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.mdpreviewer]
     dependencies:
       - target: MDPreviewerCore
       - target: MDPreviewerExtension
@@ -37,6 +41,9 @@ targets:
     sources: [MDPreviewerExtension]
     entitlements:
       path: MDPreviewerExtension/MDPreviewerExtension.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        com.apple.security.application-groups: [group.com.mdpreviewer]
     dependencies:
       - target: MDPreviewerCore
     info:
@@ -53,6 +60,8 @@ targets:
     type: bundle.unit-test
     platform: macOS
     sources: [MDPreviewerTests]
+    entitlements:
+      path: MDPreviewerTests/MDPreviewerTests.entitlements
     dependencies:
       - target: MDPreviewerCore
       - package: SnapshotTesting

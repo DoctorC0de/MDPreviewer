@@ -93,6 +93,7 @@
 		09AB40A35CC61693D637CA41 /* MDPreviewerExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDPreviewerExtension.entitlements; sourceTree = "<group>"; };
 		2ABB65B633E9FCC3507F52EA /* MDPreviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPreviewerTests.swift; sourceTree = "<group>"; };
 		810E69DC394304E68D5D9D0A /* MDPreviewerCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MDPreviewerCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		92945262909713AB63F21280 /* MDPreviewerTests.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDPreviewerTests.entitlements; sourceTree = "<group>"; };
 		9528FA64F50D55219AAECE3A /* MDPreviewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDPreviewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10229EB18B03B49F15AB4BD /* MDPreviewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDPreviewer.entitlements; sourceTree = "<group>"; };
 		CB89EC0996A27B5ABEE527D6 /* MDPreviewerExtension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MDPreviewerExtension-Info.plist"; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		EE3B718A95BFE41FF9EED42B /* MDPreviewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MDPreviewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5C3F064F109421786127EB /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		FBA2795FCE0BE8DC28968C0C /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		FEE786D48BB1A7E7630F6840 /* MDPreviewerCore.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MDPreviewerCore.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				FBA2795FCE0BE8DC28968C0C /* Core.swift */,
+				FEE786D48BB1A7E7630F6840 /* MDPreviewerCore.entitlements */,
 			);
 			path = MDPreviewerCore;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 		E13E4AD84C9F63BB46E5C320 /* MDPreviewerTests */ = {
 			isa = PBXGroup;
 			children = (
+				92945262909713AB63F21280 /* MDPreviewerTests.entitlements */,
 				2ABB65B633E9FCC3507F52EA /* MDPreviewerTests.swift */,
 			);
 			path = MDPreviewerTests;
@@ -488,6 +492,7 @@
 		3731E14EEE36D5B3103611D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MDPreviewerCore/MDPreviewerCore.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -512,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = MDPreviewerTests/MDPreviewerTests.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -589,6 +595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_ENTITLEMENTS = MDPreviewerTests/MDPreviewerTests.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -603,6 +610,7 @@
 		AC4C9A501A3A9CD09A7470E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = MDPreviewerCore/MDPreviewerCore.entitlements;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
