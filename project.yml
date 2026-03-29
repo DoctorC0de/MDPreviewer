@@ -3,7 +3,7 @@ options:
   bundleIdPrefix: com.mdpreviewer
 packages:
   MarkdownUI:
-    url: https://github.com/gonzalezreal/swift-ui-markdown
+    url: https://github.com/gonzalezreal/swift-markdown-ui
     from: 2.1.0
   Splash:
     url: https://github.com/JohnSundell/Splash
