@@ -26,7 +26,7 @@ class PreviewProvider: QLPreviewProvider, QLPreviewingController {
             content = try String(contentsOf: fileURL, encoding: .utf8)
         }
         
-        return QLPreviewReply(contextSize: .zero) {
+        return QLPreviewReply(contextSize: .zero) { () -> MarkdownPreviewView in
             MarkdownPreviewView(content: content, isTruncated: isTruncated)
         }
     }
