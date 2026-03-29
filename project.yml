@@ -27,6 +27,9 @@ targets:
     platform: macOS
     deploymentTarget: "14.0"
     sources: [MDPreviewer]
+    settings:
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_CFBundleDisplayName: MDPreviewer
     entitlements:
       path: MDPreviewer/MDPreviewer.entitlements
       properties:
