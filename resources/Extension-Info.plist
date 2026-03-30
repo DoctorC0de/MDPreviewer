@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>MDPreviewerQL</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,16 +24,19 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
+			<key>QLIsDataBasedPreview</key>
+			<true/>
 			<key>QLSupportedContentTypes</key>
 			<array>
 				<string>public.markdown</string>
 				<string>net.daringfireball.markdown</string>
+				<string>public.plain-text</string>
 			</array>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.quicklook.preview</string>
 		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).PreviewProvider</string>
+		<string>QLBridge</string>
 	</dict>
 </dict>
 </plist>

@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "crates/mdpreviewer-core",
+    "crates/mdpreviewer-host",
+]
+resolver = "2"

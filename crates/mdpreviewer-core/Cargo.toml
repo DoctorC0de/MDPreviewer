@@ -1,0 +1,12 @@
+[package]
+name = "mdpreviewer-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+pulldown-cmark = { version = "0.10", default-features = false, features = ["html"] }
+syntect = { version = "5.2", default-features = false, features = ["html", "parsing", "default-themes", "default-syntaxes", "regex-fancy"] }
+libc = "0.2"

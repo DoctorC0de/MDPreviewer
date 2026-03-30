@@ -1,4 +1,4 @@
-name: Build MDPreviewer
+name: Build MDPreviewer (Rust)
 
 on:
   push:
@@ -16,25 +16,27 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v5
 
-    - name: Install XcodeGen
-      run: brew install xcodegen
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
 
-    - name: Generate Xcode Project
-      run: xcodegen generate
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
 
-    - name: Resolve Package Dependencies
-      run: xcodebuild -resolvePackageDependencies -project MDPreviewer.xcodeproj -scheme MDPreviewer
+    - name: Build Rust Core
+      run: cargo build --release
 
-    - name: Build MDPreviewer
+    - name: Build Swift Bridge
       run: |
-        xcodebuild build -project MDPreviewer.xcodeproj -scheme MDPreviewer \
-          -configuration Release \
-          -destination 'platform=macOS' \
-          -derivedDataPath ./build \
-          CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGN_ENTITLEMENTS=""
+        mkdir -p build
+        swiftc -emit-library -static -o build/libqlbridge.a \
+          -sdk $(xcrun --show-sdk-path --sdk macosx) \
+          swift-bridge/QLBridge.swift
+
+    - name: Bundle App
+      run: ./scripts/bundle.sh
 
     - name: Upload MDPreviewer.app
       uses: actions/upload-artifact@v4
       with:
         name: MDPreviewer
-        path: ./build/Build/Products/Release/MDPreviewer.app
+        path: build/MDPreviewer.app
